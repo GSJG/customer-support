@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOGO Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            color: #ff4081;
+        }
+        .option {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+        .option.selected {
+            border-color: #ff4081;
+            background: #ffe6f0;
+        }
+        .option input {
+            margin-right: 10px;
+        }
+        .details {
+            display: none;
+            padding-top: 10px;
+        }
+        .selected .details {
+            display: block;
+        }
+        .discount {
+            background: #ff4081;
+            color: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .price {
+            font-weight: bold;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: gray;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        .add-to-cart {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .free-delivery {
+            color: #ff4081;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>YAY! It's BOGO</h2>
+        <div class="option" data-value="10">
+            <input type="radio" name="bundle" value="10">
+            <strong>1 Unit</strong> <span class="discount">10% Off</span>
+            <div class="price">$10.00 USD <span class="old-price">$24.00 USD</span></div>
+        </div>
+        <div class="option" data-value="18">
+            <input type="radio" name="bundle" value="18">
+            <strong>2 Units</strong> <span class="discount">20% Off</span>
+            <div class="price">$18.00 USD <span class="old-price">$24.00 USD</span></div>
+            <div class="details">
+                <label>#1 Size: <select><option>S</option><option>M</option></select></label>
+                <label>Color: <select><option>Black</option><option>White</option></select></label>
+                <br>
+                <label>#2 Size: <select><option>S</option><option>M</option></select></label>
+                <label>Color: <select><option>Black</option><option>White</option></select></label>
+            </div>
+        </div>
+        <div class="option" data-value="24">
+            <input type="radio" name="bundle" value="24">
+            <strong>3 Units</strong> <span class="discount">30% Off</span>
+            <div class="price">$24.00 USD <span class="old-price">$24.00 USD</span></div>
+        </div>
+        <div class="free-delivery">Free Delivery</div>
+        <div class="total">Total: <strong id="total-price">$18.00 USD</strong></div>
+        <button class="add-to-cart">+ Add to Cart</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.option');
+            const totalPriceElement = document.getElementById('total-price');
+            
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    option.querySelector('input').checked = true;
+                    totalPriceElement.textContent = `$${option.getAttribute('data-value')}.00 USD`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
